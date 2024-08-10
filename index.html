@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Weather App</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="output.css" />
+  <!-- -----------------Fav-icon ------------------------------- -->
+  <link rel="icon"
+    href="https://cdn-icons-png.freepik.com/256/6421/6421030.png?ga=GA1.1.1107188093.1692461128&semt=ais_hybrid"
+    type="image/x-icon" />
+  <meta name="keywords" content="weather, forecast, temperature, conditions" />
+  <meta name="author" content="Aashik" />
+  <!-- -----------------Font Awesome cdn------------------------------- -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+
+<body>
+  <!-- -------------------------Navbar------------------------- -->
+  <nav class="h-14 w-screen bg-blue-600 text-white">
+    <div class="navbar flex justify-between items-center h-full w-96 text-xl">
+      <h3>Weather App</h3>
+      <h3>Home</h3>
+      <h3><a href="about.html">About this App</a></h3>
+    </div>
+  </nav>
+
+  <div id="customAlert" class="custom-alert">
+    <span id="alertMessage"></span>
+    <button id="closeAlert" onclick="closeAlert()">Close</button>
+  </div>
+
+  <div id="loader" class="loader"></div>
+  <div class="weatherdata flex justify-center items-center">
+    <!-- -------------------------Dashboard------------------------- -->
+
+    <div class="WeatherDashboard">
+      <!-- -------------------------Heading of dashboard------------------------- -->
+
+      <div class="weatherhead bg-blue-500 text-center text-white">
+        <h1>Weather Dashboard</h1>
+      </div>
+
+      <div class="deshbord">
+        <!-- ------------------------- Left dashboard------------------------- -->
+
+        <div class="leftSide">
+          <label for="cityName">Enter a City Name</label>
+          <input type="text" autocomplete="off" id="inputEl" placeholder="E.g., New York,London,Tokyo" />
+          <div class="recentSearchesDiv">
+            <i class="fa-regular text-red-600 cross fa-circle-xmark"></i>
+            <div class="recentSearches"> </div>
+          </div>
+
+          <div class="LeftDashboardbtn">
+            <button class="button bg-blue-500 searchBtn text-white" onclick="data()">
+              Search
+            </button>
+            <p class="text-center">or</p>
+            <button class="button2 bg-gray-500 locationBtn text-white" onclick="fetchLocation()">
+              Use Current Location
+            </button>
+          </div>
+        </div>
+
+        <!-- -------------------------Right dashboard------------------------- -->
+
+        <div class="RightDashboard">
+          <div class="cityInfoDiv">
+            <div id="weatherDetails">
+              <h1 id="cityName">London (2024-08-6 09:00:00 Am)</h1>
+              <h3 id="temp">
+                <i class="fa-solid text-red-500 fa-temperature-high"></i>&nbsp;Temperature&nbsp;
+                <i class="fa-solid fa-arrow-right"></i> 33 C°
+              </h3>
+              <h3 id="Wind">
+                <i class="fa-solid text-yellow-400 fa-fan"></i>&nbsp;Wind&nbsp;
+                <i class="fa-solid fa-arrow-right"></i> 3.8m/s
+              </h3>
+              <h3 id="humidity">
+                <i class="fa-solid text-blue-700 fa-droplet"></i>
+                &nbsp;Humidity &nbsp;<i class="fa-solid fa-arrow-right"></i>
+                90%
+              </h3>
+            </div>
+            <div id="weatherIcon">
+              <img src="heavy-rain.png" id="imgEl" height="100px " width="100px" alt="" />
+              <p id="iconDesc"></p>
+            </div>
+          </div>
+
+          <div class="Day5">5 Day Forecast</div>
+
+          <div class="fiveDiv">
+            <div class="fiveDiv1 fiveDivsDiv">
+              <h1 id="Date6">( 2024-08-6 )</h1>
+              <div class="weatherIconClass" class="flex h-20 w-32 flex-col justify-center items-center">
+                <img src="heavy-rain.png" class="imgElClass6" height="50px " width="50px" alt="" />
+                <p class="iconDescClass6"></p>
+              </div>
+              <h3 id="temp6">
+                <i class="fa-solid text-red-200 fa-temperature-high"></i>&nbsp;Temp&nbsp; <i
+                  class="fa-solid fa-arrow-right"></i> 31
+                C°
+              </h3>
+              <h3 id="Wind6">
+                <i class="fa-solid text-red-200 fa-fan"></i>&nbsp;Wind
+                <i class="fa-solid fa-arrow-right"></i> 2.8m/s
+              </h3>
+              <h3 id="humidity6">
+                <i class="fa-solid text-red-200 fa-droplet"></i>
+                &nbsp;Humidity <i class="fa-solid fa-arrow-right"></i>90%
+              </h3>
+            </div>
+
+            <div class="fiveDiv2 fiveDivsDiv">
+              <h1 id="Date14">( 2024-08-6 )</h1>
+              <div class="weatherIconClass" class="flex h-20 w-32 flex-col justify-center items-center">
+                <img src="heavy-rain.png" class="imgElClass14" height="50px " width="50px" alt="" />
+                <p class="iconDescClass14"></p>
+              </div>
+              <h3 id="temp14">
+                <i class="fa-solid text-red-200 fa-temperature-high"></i>&nbsp;Temp&nbsp;
+                <i class="fa-solid fa-arrow-right"></i>
+                31 C°
+              </h3>
+              <h3 id="Wind14">
+                <i class="fa-solid text-red-200 fa-fan"></i>&nbsp;Wind
+                <i class="fa-solid fa-arrow-right"></i> 2.8m/s
+              </h3>
+              <h3 id="humidity14">
+                <i class="fa-solid text-red-200 fa-droplet"></i>
+                &nbsp;Humidity <i class="fa-solid fa-arrow-right"></i>90%
+              </h3>
+            </div>
+
+            <div class="fiveDiv3 fiveDivsDiv">
+              <h1 id="Date22">( 2024-08-6 )</h1>
+              <div class="weatherIconClass" class="flex h-20 w-32 flex-col justify-center items-center">
+                <img src="heavy-rain.png" class="imgElClass22" height="50px " width="50px" alt="" />
+                <p class="iconDescClass22"></p>
+              </div>
+              <h3 id="temp22">
+                <i class="fa-solid text-red-200 fa-temperature-high"></i>&nbsp;Temp&nbsp;
+                <i class="fa-solid fa-arrow-right"></i>
+                31 C°
+              </h3>
+              <h3 id="Wind22">
+                <i class="fa-solid text-red-200 fa-fan"></i>&nbsp;Wind
+                <i class="fa-solid fa-arrow-right"></i> 2.8m/s
+              </h3>
+              <h3 id="humidity22">
+                <i class="fa-solid text-red-200 fa-droplet"></i>
+                &nbsp;Humidity <i class="fa-solid fa-arrow-right"></i>90%
+              </h3>
+            </div>
+
+            <div class="fiveDiv4 fiveDivsDiv">
+              <h1 id="Date30">( 2024-08-6 )</h1>
+              <div class="weatherIconClass" class="flex h-20 w-32 flex-col justify-center items-center">
+                <img src="heavy-rain.png" class="imgElClass30" height="50px " width="50px" alt="" />
+                <p class="iconDescClass30"></p>
+              </div>
+              <h3 id="temp30">
+                <i class="fa-solid text-red-200 fa-temperature-high"></i>&nbsp;Temp&nbsp;
+                <i class="fa-solid fa-arrow-right"></i>
+                31 C°
+              </h3>
+              <h3 id="Wind30">
+                <i class="fa-solid text-red-200 fa-fan"></i>&nbsp;Wind
+                <i class="fa-solid fa-arrow-right"></i> 2.8m/s
+              </h3>
+              <h3 id="humidity30">
+                <i class="fa-solid text-red-200 fa-droplet"></i>
+                &nbsp;Humidity <i class="fa-solid fa-arrow-right"></i>90%
+              </h3>
+            </div>
+
+            <div class="fiveDiv5 fiveDivsDiv">
+              <h1 id="Date38">( 2024-08-6 )</h1>
+              <div class="weatherIconClass" class="flex h-20 w-32 flex-col justify-center items-center">
+                <img src="heavy-rain.png" class="imgElClass38" height="50px " width="50px" alt="" />
+                <p class="iconDescClass38"></p>
+              </div>
+              <h3 id="temp38">
+                <i class="fa-solid text-red-200 fa-temperature-high"></i>&nbsp;Temp&nbsp;
+                <i class="fa-solid fa-arrow-right"></i>
+                31 C°
+              </h3>
+              <h3 id="Wind38">
+                <i class="fa-solid text-red-200 fa-fan"></i>&nbsp;Wind
+                <i class="fa-solid fa-arrow-right"></i> 2.8m/s
+              </h3>
+              <h3 id="humidity38">
+                <i class="fa-solid text-red-200 fa-droplet"></i>
+                &nbsp;Humidity <i class="fa-solid fa-arrow-right"></i>90%
+              </h3>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"
+    integrity="sha512-7eHRwcbYkK4d9g/6tD/mhkf++eoTHwpNM9woBxtPUBWm67zeAfFC+HrdoE2GanKeocly/VxeLvIqwvCdk7qScg=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="script.js"></script>
+</body>
+
+</html>
